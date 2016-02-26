@@ -1,0 +1,5 @@
+(fset 'semi-colonizer
+      [C-e ;])
+
+(fset 'comaizer
+      [C-e ,])

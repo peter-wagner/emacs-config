@@ -133,8 +133,7 @@
 (global-set-key (kbd "<f13>") 'eval-buffer)
 (global-set-key (kbd "<kp-decimal>") 'comint-previous-input)
 (global-set-key (kbd "<kp-enter>") 'comint-next-input)
-(global-set-key (kbd "<clear>") 'brant-clear-region)
-(global-set-key "\C-c\C-d" "\C-a\C- \C-n\M-w\C-y")
+(global-set-key (kbd "<kp-delete>") 'brant-clear-region)
 (global-set-key (kbd "C-c <deletechar>") 'pairuser-cider-reple-clear-output-and-buffer)
 
 (global-set-key (kbd "C-c p") 'paredit-mode)
@@ -215,7 +214,6 @@
 
 (global-set-key (kbd "C-c j") 'cider-jack-in)
 (global-set-key (kbd "C-c r") 'cider-restart)
-
 (global-set-key (kbd "C-c C-l") 'cider-load-file)
 
 (require 'ac-cider)
@@ -254,6 +252,12 @@
 (tool-bar-mode -1)
 
 
+
+(load-file "/Users/pairuser/.emacs_macros")
+(global-set-key (kbd "C-c ;") 'semi-colonizer)
+(global-set-key (kbd "C-c ,") 'comaizer)
+
+
 ;; (require 'clj-refactor)
 ;; (defun my-clojure-mode-hook ()
 ;;     (clj-refactor-mode 1)
@@ -278,3 +282,4 @@
  ;; If there is more than one, they won't work right.
  )
 
+(put 'erase-buffer 'disabled nil)
