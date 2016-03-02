@@ -9,7 +9,7 @@
 ;; (profiler-stop)
 ;; (profiler-report)
 
-"--------THEME STUFF--------"
+;; "--------THEME STUFF--------"
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
 ;;(load-theme 'ample)
 ;;(load-theme 'ample-zen t)
@@ -24,7 +24,7 @@
 
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
 
-"-------ORG-MODE STUFF-------"
+;; "-------ORG-MODE STUFF-------"
 
 (unless package-archive-contents    ;; Refresh the packages descriptions
   (package-refresh-contents))
@@ -124,7 +124,7 @@
   (delete-region (point-min) (point-max))
   (comint-send-input))
 
-"-------KEY BINDINGS-------"
+;; "-------KEY BINDINGS-------"
 
 (global-set-key (kbd "<home>") 'beginning-of-buffer)
 (global-set-key (kbd "<end>") 'end-of-buffer)
@@ -141,14 +141,14 @@
 (global-set-key (kbd "C-c t") 'toggle-truncate-lines)
 (global-set-key (kbd "C-c v") 'brant-clear-region)
 
-"------SHELL CONFIG STUFF----------"
+;; "------SHELL CONFIG STUFF----------"
 
 (setq ansi-color-names-vector ; better contrast colors
       ["black" "red4" "green4" "yellow4"
        "blue3" "magenta4" "cyan4" "white"])
 (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
 
-"------CLEAR COMMAND-------"
+;; "------CLEAR COMMAND-------"
 (add-hook 'shell-mode-hook 'n-shell-mode-hook)
 (defun n-shell-mode-hook ()
   "12Jan2002 - sailor, shell mode customizations."
@@ -176,13 +176,13 @@
    )
   )
 
-"--------GROOVY MODE------"
+;; "--------GROOVY MODE------"
 ;;; use groovy-mode when file ends in .groovy or has #!/bin/groovy at start
 (autoload 'groovy-mode "groovy-mode" "Groovy editing mode." t)
 (add-to-list 'auto-mode-alist '("\.groovy$" . groovy-mode))
 (add-to-list 'interpreter-mode-alist '("groovy" . groovy-mode))
 
-"-------CLOJURE CIDER LEIN STUFF-------"
+;; "-------CLOJURE CIDER LEIN STUFF-------"
 (rainbow-delimiters-mode 1)
 (require 'cider)
 
@@ -258,6 +258,36 @@
 (global-set-key (kbd "C-c ,") 'comaizer)
 
 
+
+(require 'web-mode)
+(add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.tpl\\.php\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.[agj]sp\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.as[cp]x\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.js\\'" . web-mode))
+
+(defun my-web-mode-hook ()
+  "Hooks for Web mode."
+  (setq web-mode-markup-indent-offset 2))
+(add-hook 'web-mode-hook  'my-web-mode-hook)
+
+(require 'web-beautify) ;; Not necessary if using ELPA package
+    (eval-after-load 'js2-mode
+      '(define-key js2-mode-map (kbd "C-c b") 'web-beautify-js))
+    (eval-after-load 'json-mode
+      '(define-key json-mode-map (kbd "C-c b") 'web-beautify-js))
+    (eval-after-load 'sgml-mode
+      '(define-key html-mode-map (kbd "C-c b") 'web-beautify-html))
+    (eval-after-load 'css-mode
+      '(define-key css-mode-map (kbd "C-c b") 'web-beautify-css))
+    (eval-after-load 'scss-mode
+      '(define-key scss-mode-map (kbd "C-c b") 'web-beautify-css))
+;; (require 'flymake-gjshint)
+;;   (add-hook 'js-mode-hook 'flymake-gjshint:load)
+
 ;; (require 'clj-refactor)
 ;; (defun my-clojure-mode-hook ()
 ;;     (clj-refactor-mode 1)
@@ -282,4 +312,4 @@
  ;; If there is more than one, they won't work right.
  )
 
-(put 'erase-buffer 'disabled nil)
+;; (put 'erase-buffer 'disabled nil)
