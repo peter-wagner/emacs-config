@@ -1,5 +1,5 @@
 (fset 'semi-colonizer
-      "\C-e ;")
+      "\C-e;")
 
 (fset 'comaizer
    "\C-e,")

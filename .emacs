@@ -22,7 +22,16 @@
   (add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t)
   (package-initialize))
 
-(add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
+;; (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
+;; (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
+;; (add-to-list 'auto-mode-alist '("\\.jsx\\'" . js2-mode))
+(add-to-list 'auto-mode-alist '("\\.js?\\'" . js2-jsx-mode))
+(add-to-list 'auto-mode-alist '("\\.jsx\\'" . js2-jsx-mode))
+(add-to-list 'interpreter-mode-alist '("node" . js2-jsx-mode))
+(setq css-indent-offset 2)
+(setq js2-basic-offset 2)
+(setq js2-bounce-indent-p t)
+(setq js2-highlight-level 3)
 
 ;; "-------ORG-MODE STUFF-------"
 
@@ -93,6 +102,11 @@
 (icomplete-mode t)
 (setq org-directory "/Users/pairuser/.org/")
 
+(tool-bar-mode -1)
+(mouse-wheel-mode -1)
+
+(setq pending-delete-mode t)
+
 (defun perfect-track-directory (text)
   (if (string-match "\\w*Working directory is ||\\([^|]+\\)||" text)
       (cd (substring text (match-beginning 1) (match-end 1)))))
@@ -112,6 +126,10 @@
 (setq shell-filename "bash")
 (setenv "SHELL" shell-file-name)
 (setq explicit-shell-file-name shell-file-name)
+
+
+(add-hook 'java-mode-hook #'auto-complete-mode)
+
 
 (defun brant-clear()
   (interactive)
@@ -249,7 +267,18 @@
 
 
 
-(tool-bar-mode -1)
+(require 'expand-region)
+(global-set-key (kbd "C-=") 'er/expand-region)
+
+
+
+(global-set-key (kbd "C-:") 'avy-goto-char)
+(global-set-key (kbd "C-'") 'avy-goto-char-2)
+(global-set-key (kbd "M-g f") 'avy-goto-line)
+(global-set-key (kbd "M-g w") 'avy-goto-word-1)
+(global-set-key (kbd "M-g e") 'avy-goto-word-0)
+
+(avy-setup-default)
 
 
 
@@ -258,6 +287,9 @@
 (global-set-key (kbd "C-c ,") 'comaizer)
 
 
+
+(require 'expand-region)
+(global-set-key (kbd "C-=") 'er/expand-region)
 
 (require 'web-mode)
 (add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
